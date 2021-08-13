@@ -49,6 +49,11 @@ usbasp
 arduino -P COM1 -b 19200
 ```
 
+**avrdude_prog.txt** - USBtiny
+```
+usbtiny
+```
+
 ---
 
 Do you like this project? Please [star this project on GitHub](https://github.com/ricaun/avrdude_eeprom_generator/stargazers)!
