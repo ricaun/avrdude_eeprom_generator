@@ -1,2 +1,4 @@
-avrdude\avrdude.exe -c usbasp -p atmega328p -U eeprom:w:eeprom7.hex:i -v
+set /p prog=<avrdude_prog.txt
+set /p chip=<avrdude_chip.txt
+avrdude\avrdude.exe -C avrdude\avrdude.conf -c %prog% -p %chip% -U eeprom:w:eeprom7.hex:i -v
 @pause

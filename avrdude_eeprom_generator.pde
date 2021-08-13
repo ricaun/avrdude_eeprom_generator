@@ -13,7 +13,7 @@ void setup() {
   size(320,320);
   fill(50);
   
-  for(int i=1; i<=12; i++)
+  for(int i=1; i<=32; i++)
   {
     CreateBat(i);
     CreateFile(i);
@@ -28,8 +28,19 @@ void CreateBat(int value)
   PrintWriter output = createWriter(folder + "\\" + fileName + value + ".bat");
   String file = fileName + value + fileExt;
   String line = "";
-   
-  line += "avrdude\\avrdude.exe -c usbasp -p atmega328p -U eeprom:w:"+ file+":i -v";
+  
+  line += "set /p prog=<avrdude_prog.txt";
+  line += "\n";
+  
+  line += "set /p chip=<avrdude_chip.txt";
+  line += "\n";
+  
+  line += "avrdude\\avrdude.exe -C avrdude\\avrdude.conf -c %prog% -p %chip% -U eeprom:w:"+ file+":i -v";
+  
+  //line += "avr\\bin\\avrdude -C avr\\etc\\avrdude.conf -c usbasp -p atmega328p -U eeprom:w:"+ file+":i -v";
+  //line += "avr\\bin\\avrdude -C avr\\etc\\avrdude.conf -c arduino -P COM10 -b 19200 -p atmega328p -U eeprom:w:"+ file+":i -v";
+  //line += "avrdude\\avrdude.exe -c usbasp -p atmega328p -U eeprom:w:"+ file+":i -v";
+  //line += "avrdude\\avrdude.exe -carduino -PCOM10 -b19200 -p atmega328p -U eeprom:w:"+ file+":i -v";
   line += "\n";
   line += "@pause";
   
