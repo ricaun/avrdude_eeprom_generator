@@ -13,6 +13,8 @@ void setup() {
   size(320,320);
   fill(50);
   
+  CreateFlash();
+  
   for(int i=1; i<=32; i++)
   {
     CreateBat(i);
@@ -22,6 +24,36 @@ void setup() {
   noLoop();
   exit();
 }
+
+void CreateFlash()
+{
+  PrintWriter output = createWriter(folder + "\\" + "avrdude_flash" + ".bat");
+  String line = "";
+  
+  line += "set /p flash=<avrdude_flash.txt";
+  line += "\n";
+  
+  line += "set /p prog=<avrdude_prog.txt";
+  line += "\n";
+  
+  line += "set /p chip=<avrdude_chip.txt";
+  line += "\n";
+  
+  line += "avrdude\\avrdude.exe -C avrdude\\avrdude.conf -c %prog% -p %chip% -U flash:w:\"%flash%\":i -v";
+  
+  //line += "avr\\bin\\avrdude -C avr\\etc\\avrdude.conf -c usbasp -p atmega328p -U eeprom:w:"+ file+":i -v";
+  //line += "avr\\bin\\avrdude -C avr\\etc\\avrdude.conf -c arduino -P COM10 -b 19200 -p atmega328p -U eeprom:w:"+ file+":i -v";
+  //line += "avrdude\\avrdude.exe -c usbasp -p atmega328p -U eeprom:w:"+ file+":i -v";
+  //line += "avrdude\\avrdude.exe -carduino -PCOM10 -b19200 -p atmega328p -U eeprom:w:"+ file+":i -v";
+  line += "\n";
+  line += "@pause";
+  
+  output.println(line);
+  output.flush();
+  output.close();
+}
+
+
 
 void CreateBat(int value)
 {
